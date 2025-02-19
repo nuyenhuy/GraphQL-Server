@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "sourceMap": true,
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": ["node"],
+    "strict": false,
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
+    "baseUrl": ".", // This must be specified if "paths" is.
+    "paths": {
+      "*": ["*", "src/*"] // This mapping is relative to "baseUrl"
+    },
+    "emitDecoratorMetadata": true,
+  }
+}
