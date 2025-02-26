@@ -54,11 +54,11 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany
 
     @Field()
     @Column()
-    validStart: string;
+    validStart: Date;
 
-    @Field()
-    @Column()
-    validEnd: string;
+    @Field({ nullable: true })
+    @Column({ nullable: true })
+    validEnd: Date;
 
     @Field()
     @Column()
@@ -94,7 +94,7 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany
 
     @Field()
     @Column()
-    createAt: string;
+    createAt: Date;
 
     @Field()
     @Column()
@@ -386,9 +386,9 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany
     @Field()
     email: string;
     @Field()
-    validStart: string;
+    validStart: Date;
     @Field()
-    validEnd: string;
+    validEnd: Date;
     @Field()
     isCurrent: boolean;
   }
@@ -406,10 +406,12 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany
     @Field()
     email: string;
     @Field()
-    createAt: string;
+    createAt: Date;
     @Field()
     isMerge: boolean;
   }
+
+
 
   @InputType()
   export class TableInput {
@@ -425,6 +427,13 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany
     accessToken: string;
     @Field()
     refreshToken: string;
+  }
+
+  export class Upload {
+    filename: string;
+    mimetype: string;
+    encoding: string;
+    createReadStream;
   }
 
   export class UserContext {

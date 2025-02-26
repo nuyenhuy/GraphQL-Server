@@ -5,7 +5,7 @@
 
 type AdjCustomer {
   address: String!
-  createAt: String!
+  createAt: DateTimeISO!
   customerId: String!
   email: String!
   id: ID!
@@ -16,7 +16,7 @@ type AdjCustomer {
 
 input AdjCustomerInput {
   address: String!
-  createAt: String!
+  createAt: DateTimeISO!
   customerId: String!
   email: String!
   isMerge: Boolean!
@@ -60,8 +60,8 @@ type DimCustomer {
   isCurrent: Boolean!
   name: String!
   phone: String!
-  validEnd: String!
-  validStart: String!
+  validEnd: DateTimeISO
+  validStart: DateTimeISO!
 }
 
 input DimCustomerInput {
@@ -71,8 +71,8 @@ input DimCustomerInput {
   isCurrent: Boolean!
   name: String!
   phone: String!
-  validEnd: String!
-  validStart: String!
+  validEnd: DateTimeISO!
+  validStart: DateTimeISO!
 }
 
 type Event {
@@ -123,6 +123,7 @@ type Mutation {
   createVenue(venueInput: VenueInput!): Venue!
   login(loginInput: LoginInput!): LoginToken!
   refreshToken(refreshToken: String!): String!
+  uploadAdjCustomerExcel(file: Upload!): String!
 }
 
 type Query {
@@ -136,6 +137,8 @@ type Query {
   event(id: ID!): Event!
   eventSeatAvailability(eventId: Float!): EventSeatAvailability!
   events: [Event!]!
+  exportExcel(fromDate: String, tableName: String, toDate: String): String!
+  exportPDF(fromDate: String, tableName: String, toDate: String): String!
   table(id: ID!): Table!
   tables: [Table!]!
   users: [User!]!
@@ -160,6 +163,9 @@ type Ticket {
   id: ID!
   seatNo: Int!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 type User {
   email: String!

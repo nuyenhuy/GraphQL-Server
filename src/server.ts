@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import cors from 'cors';
-import express from 'express';
+import express, {NextFunction} from 'express';
 import { AppContext, UserContext } from './types/types.js';
 import { EventResolver } from './resolvers/event-resolver.js';
 import { AuthChecker, buildSchema } from 'type-graphql';
@@ -20,7 +20,7 @@ import { ArtistResolver } from './resolvers/artist-resolver.js';
 import {DimCustomerResolver} from "./resolvers/dim-customer-resolver.js";
 import {AdjCustomerResolver} from "./resolvers/adj-customer-resolver.js";
 import {TableResolver} from "./resolvers/table-resolver.js";
-
+import multer from "multer";
 const PORT = 3001;
 const app = express();
 
@@ -90,8 +90,47 @@ const options =   {
     }
   };
 
-app.use('/graphql', cors<cors.CorsRequest>(), express.json(), expressMiddleware(server,options));
-
+app.use(
+    "/graphql",
+    cors<cors.CorsRequest>(),
+    express.json(),
+    expressMiddleware(server, options)
+);
 httpServer.listen({ port: PORT }, () => {
   console.log(`Server ready at http://localhost:${PORT}/graphql`)
 });
+
+// Cấu hình multer để lưu file tạm thời
+const upload = multer({ dest: 'uploads/' });
+
+import { Request, Response } from 'express';
+import path from "path";
+import fs from "fs";
+
+// Middleware handler mà không cần trả về giá trị
+const uploadHandler = (req: Request, res: Response, next: NextFunction): void => {
+    if (!req.file) {
+        res.status(400).send('No file uploaded');
+        return;
+    }
+
+    const filePath = path.join(__dirname, 'uploads', req.file.filename);
+
+    // Kiểm tra nếu file đã tồn tại trong thư mục uploads (nếu cần update)
+    if (fs.existsSync(filePath)) {
+        // Nếu file đã tồn tại, có thể xóa hoặc thay thế nó
+        fs.unlinkSync(filePath);  // Xóa file cũ (hoặc có thể thay thế)
+    }
+
+    // Tiến hành lưu file mới vào thư mục hoặc thực hiện bất kỳ thao tác nào khác
+    fs.writeFileSync(filePath, req.file.buffer);  // Lưu file vào thư mục uploads (nếu cần)
+
+    // Gửi phản hồi thành công
+    res.status(200).send({
+        message: 'File uploaded and updated successfully',
+        file: req.file,
+    });
+};
+
+// Đảm bảo sử dụng middleware đúng cách
+app.post('/upload', uploadHandler);
