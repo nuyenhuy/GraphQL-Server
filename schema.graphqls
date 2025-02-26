@@ -3,27 +3,6 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type AdjCustomer {
-  address: String!
-  createAt: String!
-  customerId: String!
-  email: String!
-  id: ID!
-  isMerge: Boolean!
-  name: String!
-  phone: String!
-}
-
-input AdjCustomerInput {
-  address: String!
-  createAt: String!
-  customerId: String!
-  email: String!
-  isMerge: Boolean!
-  name: String!
-  phone: String!
-}
-
 type Artist {
   bio: String!
   events: [Event!]!
@@ -51,29 +30,6 @@ input BookingInput {
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
 """
 scalar DateTimeISO
-
-type DimCustomer {
-  address: String!
-  customerId: String!
-  email: String!
-  id: ID!
-  isCurrent: Boolean!
-  name: String!
-  phone: String!
-  validEnd: String!
-  validStart: String!
-}
-
-input DimCustomerInput {
-  address: String!
-  customerId: String!
-  email: String!
-  isCurrent: Boolean!
-  name: String!
-  phone: String!
-  validEnd: String!
-  validStart: String!
-}
 
 type Event {
   artists: [Artist!]!
@@ -114,11 +70,8 @@ type LoginToken {
 }
 
 type Mutation {
-  createAdjCustomer(adjCustomerInput: AdjCustomerInput!): AdjCustomer!
   createBooking(bookingInput: BookingInput!): Booking!
-  createDimCustomer(dimCustomerInput: DimCustomerInput!): DimCustomer!
   createEvent(eventInput: EventInput!): Event!
-  createTable(tableInput: TableInput!): Table!
   createUser(userInput: UserInput!): User!
   createVenue(venueInput: VenueInput!): Venue!
   login(loginInput: LoginInput!): LoginToken!
@@ -126,32 +79,15 @@ type Mutation {
 }
 
 type Query {
-  adjCustomer(id: ID!): AdjCustomer!
-  adjCustomers: [AdjCustomer!]!
   allBookings: [Booking!]!
   artists: [Artist!]!
   bookings(eventId: Float!): [Booking!]!
-  dimCustomer(id: ID!): DimCustomer!
-  dimCustomers: [DimCustomer!]!
   event(id: ID!): Event!
   eventSeatAvailability(eventId: Float!): EventSeatAvailability!
   events: [Event!]!
-  table(id: ID!): Table!
-  tables: [Table!]!
   users: [User!]!
   venue(id: ID!): Venue!
   venues: [Venue!]!
-}
-
-type Table {
-  description: String!
-  id: ID!
-  tableName: String!
-}
-
-input TableInput {
-  description: String!
-  tableName: String!
 }
 
 type Ticket {

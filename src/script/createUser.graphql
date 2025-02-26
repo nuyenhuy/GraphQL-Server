@@ -3,11 +3,10 @@ mutation {
         name: "John Doe"
         email: "johndoe@gmail.com"
         password: "securepassword"
-        role: "ROLE_ADMIN"
-    }) {
-        id
-        name
-        email
-        role
+        role: "ROLE_ADMIN"}) {
+            id
+            name
+            email
+            role
     }
 }

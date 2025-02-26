@@ -1,7 +1,7 @@
-import { AppDataSource } from "../connection/datasource.js";
-import { In, Repository } from "typeorm";
-import { Artist, Event, EventInput, Venue } from '../types/types.js';
-import { Arg, Authorized, FieldResolver, ID, Mutation, Query, Resolver, Root } from "type-graphql";
+import {AppDataSource} from "../connection/datasource.js";
+import {In, Repository} from "typeorm";
+import {Artist, Event, EventInput, Venue} from '../types/types.js';
+import {Arg, Authorized, FieldResolver, ID, Mutation, Query, Resolver, Root} from "type-graphql";
 
 @Resolver(of => Event)
 export class EventResolver {
@@ -41,8 +41,7 @@ export class EventResolver {
         event.category = eventInput.category;
         event.imageUrl = eventInput.imageUrl;
         event.venueId = eventInput.venueId;
-        const artists:Artist[] = await this.artistRepository.find({where: {id: In(eventInput.artistIds)}});
-        event.artists = artists;
+        event.artists = await this.artistRepository.find({where: {id: In(eventInput.artistIds)}});
         return this.eventRepository.save(event);
     }
 

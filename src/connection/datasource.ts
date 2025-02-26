@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import { Event, Artist, Booking, Review, Ticket, User, Venue } from "../types/types.js"
+import {Event, Artist, Booking, Review, Ticket, User, Venue, AdjCustomer, DimCustomer, Table} from "../types/types.js"
 import { DataSource } from "typeorm"
 
 export const AppDataSource = new DataSource({
@@ -9,7 +9,7 @@ export const AppDataSource = new DataSource({
     username: "postgres",
     password: "123456",
     database: "events",
-    entities: [Event, Booking, Ticket, User, Venue, Artist, Review],
+    entities: [Event, Booking, Ticket, User, Venue, Artist, Review, AdjCustomer, DimCustomer, Table],
     synchronize: true,
     logging: true,
 });

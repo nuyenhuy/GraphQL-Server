@@ -1,10 +1,9 @@
 import { Field, Float, ID, InputType, Int, ObjectType } from "type-graphql";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, Relation } from "typeorm";
 
-@ObjectType()
-@Entity("Artist")
-export class Artist {
-    
+  @ObjectType()
+  @Entity("Artist")
+  export class Artist {
     @Field(type => ID)
     @PrimaryGeneratedColumn()
     id: number;
@@ -24,6 +23,82 @@ export class Artist {
     @Field(type => [Event])
     @ManyToMany(() => Event, (event) => event.artists)
     events: Event[];
+  }
+
+  @ObjectType()
+  @Entity("DimCustomer")
+  export class DimCustomer {
+    @Field(type => ID)
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Field()
+    @Column()
+    customerId: string;
+
+    @Field()
+    @Column()
+    name: string;
+
+    @Field()
+    @Column()
+    address: string;
+
+    @Field()
+    @Column()
+    phone: string;
+
+    @Field()
+    @Column()
+    email: string;
+
+    @Field()
+    @Column()
+    validStart: string;
+
+    @Field()
+    @Column()
+    validEnd: string;
+
+    @Field()
+    @Column()
+    isCurrent: boolean;
+  }
+
+  @ObjectType()
+  @Entity("AdjCustomer")
+  export class AdjCustomer {
+    @Field(type => ID)
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Field()
+    @Column()
+    customerId: string;
+
+    @Field()
+    @Column()
+    name: string;
+
+    @Field()
+    @Column()
+    address: string;
+
+    @Field()
+    @Column()
+    phone: string;
+
+    @Field()
+    @Column()
+    email: string;
+
+    @Field()
+    @Column()
+    createAt: string;
+
+    @Field()
+    @Column()
+    isMerge: boolean;
   }
   
   @ObjectType()
@@ -217,6 +292,22 @@ export class Artist {
   }
 
   @ObjectType()
+  @Entity("Table")
+  export class Table {
+    @Field(type => ID)
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Field()
+    @Column()
+    tableName: string;
+
+    @Field()
+    @Column()
+    description: string;
+  }
+
+  @ObjectType()
   export class Weather {
     @Field((type) => Float)
     temp: number;
@@ -237,7 +328,6 @@ export class Artist {
     @Field()
     windSpeed: string;
   }
-
 
   @InputType()
   export class EventInput{
@@ -281,6 +371,52 @@ export class Artist {
     email: string;
     @Field()
     password: string;
+  }
+
+  @InputType()
+  export class DimCustomerInput {
+    @Field()
+    customerId: string;
+    @Field()
+    name: string;
+    @Field()
+    address: string;
+    @Field()
+    phone: string;
+    @Field()
+    email: string;
+    @Field()
+    validStart: string;
+    @Field()
+    validEnd: string;
+    @Field()
+    isCurrent: boolean;
+  }
+
+  @InputType()
+  export  class AdjCustomerInput {
+    @Field()
+    customerId: string;
+    @Field()
+    name: string;
+    @Field()
+    address: string;
+    @Field()
+    phone: string;
+    @Field()
+    email: string;
+    @Field()
+    createAt: string;
+    @Field()
+    isMerge: boolean;
+  }
+
+  @InputType()
+  export class TableInput {
+    @Field()
+    tableName: string;
+    @Field()
+    description: string;
   }
 
   @ObjectType()

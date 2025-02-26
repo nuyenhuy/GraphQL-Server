@@ -2,7 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import cors from 'cors';
 import express from 'express';
-import { AppContext, Event, UserContext } from './types/types.js';
+import { AppContext, UserContext } from './types/types.js';
 import { EventResolver } from './resolvers/event-resolver.js';
 import { AuthChecker, buildSchema } from 'type-graphql';
 import { VenueResolver } from './resolvers/venue-resolver.js';
@@ -10,7 +10,6 @@ import { UserResolver } from './resolvers/user-resolver.js';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from './constants/constants.js';
 import { BookingResolver } from './resolvers/booking-resolver.js';
-
 import { createServer } from 'http';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { mergeSchemas } from '@graphql-tools/schema';
@@ -18,12 +17,14 @@ import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { subScriptionSchema } from './subScriptionSchema.js';
 import { ArtistResolver } from './resolvers/artist-resolver.js';
+import {DimCustomerResolver} from "./resolvers/dim-customer-resolver.js";
+import {AdjCustomerResolver} from "./resolvers/adj-customer-resolver.js";
+import {TableResolver} from "./resolvers/table-resolver.js";
 
 const PORT = 3001;
 const app = express();
 
 const httpServer = createServer(app);
-
 
 const authChecker: AuthChecker<AppContext> = ({ context },roles) => {
   return context?.userContext?.id &&
@@ -31,7 +32,7 @@ const authChecker: AuthChecker<AppContext> = ({ context },roles) => {
 };
 
 const typeGraphQLSchema = await buildSchema({
-    resolvers: [EventResolver, VenueResolver,UserResolver,BookingResolver,ArtistResolver], 
+    resolvers: [EventResolver,VenueResolver,UserResolver,BookingResolver,ArtistResolver,DimCustomerResolver,AdjCustomerResolver,TableResolver],
     emitSchemaFile: true,
     authChecker
 });
