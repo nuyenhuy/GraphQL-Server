@@ -1,6 +1,6 @@
-CREATE OR REPLACE FUNCTION MergeAdjToDimCustomer()
-RETURNS VOID AS
-$$
+CREATE OR REPLACE PROCEDURE MergeAdjToDimCustomer()
+LANGUAGE plpgsql
+AS $$
 BEGIN
 -- Chọn schema trước khi thực thi
 SET search_path TO public;

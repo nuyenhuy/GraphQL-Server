@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "types": ["node"],
     "strict": false,
+    "skipLibCheck": true,
     "strictPropertyInitialization": false,
     "experimentalDecorators": true,
     "baseUrl": ".", // This must be specified if "paths" is.
