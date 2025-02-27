@@ -7,8 +7,8 @@ import {
   Venue,
   Event,
 } from "../types/types.js";
-import { AppDataSource } from "../connection/datasource.js";
-import { Repository } from "typeorm";
+import {AppDataSource} from "../connection/datasource.js";
+import {Repository} from "typeorm";
 import {
   Arg,
   Authorized,
@@ -19,8 +19,8 @@ import {
   Resolver,
   Root,
 } from "type-graphql";
-import { pubSub } from "../pub-sub.js";
-import { EVENT_BOOKING_CREATED } from "../constants/constants.js";
+import {pubSub} from "../pub-sub.js";
+import {EVENT_BOOKING_CREATED} from "../constants/constants.js";
 
 @Resolver((of) => Booking)
 export class BookingResolver {
@@ -42,10 +42,10 @@ export class BookingResolver {
   ): Promise<Booking[]> {
     const isUserAdmin = ctx.userContext?.role === "ROLE_ADMIN";
     if (isUserAdmin) {
-      return this.bookingRepository.find({ where: { eventId } });
+      return this.bookingRepository.find({where: {eventId}});
     } else {
       return this.bookingRepository.find({
-        where: { eventId, userId: ctx.userContext?.id },
+        where: {eventId, userId: ctx.userContext?.id},
       });
     }
   }
@@ -60,14 +60,14 @@ export class BookingResolver {
       return this.bookingRepository.find();
     } else {
       return this.bookingRepository.find({
-        where: { userId: ctx.userContext?.id },
+        where: {userId: ctx.userContext?.id},
       });
     }
   }
 
   @FieldResolver((returns) => [Ticket])
   tickets(@Root() booking: Booking): Promise<Ticket[]> {
-    return this.ticketRepository.find({ where: { bookingId: booking.id } });
+    return this.ticketRepository.find({where: {bookingId: booking.id}});
   }
 
   @FieldResolver((returns) => Event)
@@ -125,9 +125,9 @@ export class BookingResolver {
       const event = await this.eventRepository.findOneBy({
         id: newBooking.eventId,
       });
-      const venue = await this.venueRepository.findOneBy({ id: event.venueId });
+      const venue = await this.venueRepository.findOneBy({id: event.venueId});
       const bookings = await this.bookingRepository.find({
-        where: { eventId: newBooking.eventId },
+        where: {eventId: newBooking.eventId},
         relations: ["tickets"],
       });
       const bookedSeats = bookings
@@ -137,7 +137,7 @@ export class BookingResolver {
       eventSeatAvailability = {
         eventId: newBooking.eventId,
         seatsAvailable: venue.capacity - bookedSeats.length,
-        seatNos: Array.from({ length: venue.capacity }, (_, i) => i + 1).filter(
+        seatNos: Array.from({length: venue.capacity}, (_, i) => i + 1).filter(
           (seat) => !bookedSeats.includes(seat)
         ),
       };
@@ -157,7 +157,7 @@ export class BookingResolver {
       id: event.venueId,
     });
     const bookings = await this.bookingRepository.find({
-      where: { eventId },
+      where: {eventId},
       relations: ["tickets"],
     });
     const bookedSeats = bookings
@@ -166,7 +166,7 @@ export class BookingResolver {
     const eventSeatAvailability = {
       eventId,
       seatsAvailable: venue.capacity - bookedSeats.length,
-      seatNos: Array.from({ length: venue.capacity }, (_, i) => i + 1).filter(
+      seatNos: Array.from({length: venue.capacity}, (_, i) => i + 1).filter(
         (seat) => !bookedSeats.includes(seat)
       ),
     };

@@ -4,10 +4,10 @@ mutation {
         email: "johndoe@gmail.com"
         password: "securepassword"
         role: "ROLE_ADMIN"}) {
-            id
-            name
-            email
-            role
+        id
+        name
+        email
+        role
     }
 }
 
