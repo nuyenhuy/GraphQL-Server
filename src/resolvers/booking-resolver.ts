@@ -1,12 +1,8 @@
-import {
-  AppContext,
-  Booking,
-  BookingInput,
-  EventSeatAvailability,
-  Ticket,
-  Venue,
-  Event,
-} from "../types/types.js";
+import {AppContext} from "../types/User.js";
+import {Booking, BookingInput} from "../types/Booking.js";
+import {Ticket} from "../types/Ticket.js";
+import {Venue} from "../types/Venue.js";
+import {Event, EventSeatAvailability} from "../types/Event.js";
 import {AppDataSource} from "../connection/datasource.js";
 import {Repository} from "typeorm";
 import {

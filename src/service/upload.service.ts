@@ -1,6 +1,6 @@
 import xlsx from 'xlsx';
 import {Repository} from 'typeorm';
-import {AdjCustomer} from "../types/types.js";
+import {AdjCustomer} from "../types/AdjCustomer.js";
 import {AppDataSource} from "../connection/datasource.js";
 import path from 'path';
 

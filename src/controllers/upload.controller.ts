@@ -20,7 +20,6 @@ export const uploadController = {
         data: result,
       });
     } catch (error) {
-      console.error("Error processing file:", error);
       res.status(500).json({
         success: false,
         errorCode: "INTERNAL_SERVER_ERROR",

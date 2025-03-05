@@ -1,6 +1,8 @@
 import {AppDataSource} from "../connection/datasource.js";
 import {In, Repository} from "typeorm";
-import {Artist, Event, EventInput, Venue} from '../types/types.js';
+import {Artist} from '../types/Artist.js';
+import {EventInput, Event} from "../types/Event.js";
+import {Venue} from "../types/Venue.js";
 import {Arg, Authorized, FieldResolver, ID, Mutation, Query, Resolver, Root} from "type-graphql";
 
 @Resolver(of => Event)

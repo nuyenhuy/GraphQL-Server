@@ -1,6 +1,6 @@
 import {Repository} from "typeorm";
 import {Arg, ID, Mutation, Query, Resolver} from "type-graphql";
-import {AdjCustomer, AdjCustomerInput} from "../types/types.js";
+import {AdjCustomer, AdjCustomerInput} from "../types/AdjCustomer.js";
 import {AppDataSource} from "../connection/datasource.js";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
 import {FileUpload} from "graphql-upload/Upload.js";

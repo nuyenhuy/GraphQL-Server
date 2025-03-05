@@ -1,6 +1,7 @@
 import {Repository} from "typeorm";
 import {AppDataSource} from "../connection/datasource.js";
-import {Venue, VenueInput, Weather} from "../types/types.js";
+import {Venue, VenueInput} from "../types/Venue.js";
+import {Weather} from "../types/Weather.js";
 import {Arg, FieldResolver, ID, Mutation, Query, Resolver, Root} from "type-graphql";
 
 @Resolver(of => Venue)

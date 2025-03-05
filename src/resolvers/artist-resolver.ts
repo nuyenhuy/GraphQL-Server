@@ -1,5 +1,5 @@
 import {Repository} from "typeorm";
-import {Artist} from "../types/types.js";
+import {Artist} from "../types/Artist.js";
 import {Query, Resolver} from "type-graphql";
 import {AppDataSource} from "../connection/datasource.js";
 

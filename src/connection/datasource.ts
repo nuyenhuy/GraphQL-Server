@@ -1,6 +1,15 @@
 import "reflect-metadata"
-import {Event, Artist, Booking, Review, Ticket, User, Venue, AdjCustomer, DimCustomer, Table} from "../types/types.js"
-import { DataSource } from "typeorm"
+import {DataSource} from "typeorm"
+import {AdjCustomer} from "../types/AdjCustomer.js";
+import {Booking} from "../types/Booking.js";
+import {Ticket} from "../types/Ticket.js";
+import {User} from "../types/User.js";
+import {Venue} from "../types/Venue.js";
+import {Artist} from "../types/Artist.js";
+import {Review} from "../types/Review.js";
+import {DimCustomer} from "../types/DimCustomer.js";
+import {Event} from "../types/Event.js";
+import {Table} from "../types/Table.js";
 
 export const AppDataSource = new DataSource({
     type: "postgres",

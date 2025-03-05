@@ -1,5 +1,5 @@
 import {AppDataSource} from "../connection/datasource.js";
-import {LoginInput, LoginToken, User, UserInput} from '../types/types.js';
+import {LoginInput, LoginToken, User, UserInput} from '../types/User.js';
 import {Arg, Mutation, Query} from "type-graphql";
 import {Repository} from "typeorm";
 import bcrypt from 'bcrypt';

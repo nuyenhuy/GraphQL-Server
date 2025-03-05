@@ -1,6 +1,6 @@
 import {Repository} from "typeorm";
 import {Arg, ID, Mutation, Query, Resolver} from "type-graphql";
-import {Table, TableInput} from "../types/types.js";
+import {Table, TableInput} from "../types/Table.js";
 import {AppDataSource} from "../connection/datasource.js";
 
 

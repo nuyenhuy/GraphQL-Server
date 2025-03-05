@@ -1,6 +1,6 @@
 import {Repository} from "typeorm";
 import {Arg, ID, Mutation, Query, Resolver} from "type-graphql";
-import {DimCustomer, DimCustomerInput} from "../types/types.js";
+import {DimCustomer, DimCustomerInput} from "../types/DimCustomer.js";
 import {AppDataSource} from "../connection/datasource.js";
 import ExcelJS from "exceljs";
 import PDFDocument from "pdfkit";
